@@ -1,5 +1,42 @@
 # Changelog
 
+## v1.0.0 - 2026-11-10
+
+### Laravel Jalali v1.0.0
+
+The first stable release of **Laravel Jalali**, a PHP and Laravel package for seamless Jalali (Persian) date conversion, manipulation, and integration.
+
+#### ✨ Features
+
+- **Date Conversion:** Convert between Jalali (Persian) and Gregorian calendars, supporting Jalali years 1–3177.
+- **Date & Time Utilities:** Comprehensive date parsing, formatting, arithmetic, and Persian numeral support.
+- **Developer-Friendly API:** Global `jalali()` helper, Laravel Facade, and Carbon compatibility.
+- **Eloquent Integration:** Custom date and datetime casts for Laravel Eloquent models.
+- **Validation:** Built-in validation rule for Jalali dates.
+- **Localization:** Configurable timezone and Persian/English translations.
+- **Documentation:** Comprehensive bilingual documentation in English and Persian.
+- **Testing:** Extensive automated test coverage for reliability and accuracy.
+
+#### 📦 Requirements
+
+- PHP 8.3 or higher
+- Laravel 12 or 13
+
+#### 🚀 Installation
+
+```bash
+composer require itashia/laravel-jalali
+
+```
+#### 📚 Documentation
+
+See the README and documentation files for installation instructions, configuration, examples, and API references.
+
+
+---
+
+**Laravel Jalali v1.0.0 — Bringing Persian date handling to modern Laravel applications.**
+
 ## Unreleased
 
 - Implement Borkowski calendar conversion and bounded date validation.
