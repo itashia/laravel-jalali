@@ -1,66 +1,29 @@
-<div align="center">
-    <h1>Laravel Jalali</h1>
-</div>
+# Laravel Jalali
 
-<p align="center">
-    <a href="https://packagist.org/packages/itashia/laravel-jalali"><img src="https://img.shields.io/packagist/v/itashia/laravel-jalali.svg?style=flat-square" alt="Packagist"></a>
-    <a href="https://packagist.org/packages/itashia/laravel-jalali"><img src="https://img.shields.io/packagist/php-v/itashia/laravel-jalali.svg?style=flat-square" alt="PHP from Packagist"></a>
-    <a href="https://packagist.org/packages/itashia/laravel-jalali"><img src="https://badge.laravel.cloud/badge/itashia/laravel-jalali?style=flat" alt="Laravel versions"></a>
-    <a href="https://github.com/itashia/laravel-jalali/actions"><img alt="GitHub Workflow Status (main)" src="https://img.shields.io/github/actions/workflow/status/itashia/laravel-jalali/tests.yml?branch=main&label=Tests&style=flat-square"></a>
-    <a href="https://packagist.org/packages/itashia/laravel-jalali"><img src="https://img.shields.io/packagist/dt/itashia/laravel-jalali.svg?style=flat-square" alt="Total Downloads"></a>
-</p>
+Immutable Jalali date/time conversion for Laravel and PHP. [فارسی](README.fa.md)
 
-A lightweight, modern Laravel package for Jalali (Persian) date and time conversion, formatting, parsing, and manipulation, with seamless Carbon and Eloquent integration.
-
-## Installation
-
-You can install the package via Composer:
-
-```bash
+```sh
 composer require itashia/laravel-jalali
 ```
 
-You may publish all of the package's resources at once:
+Requires PHP 8.3+ and Laravel 12 or 13. Composer discovers the provider and `Jalali` facade.
 
-```bash
-php artisan vendor:publish --tag="laravel-jalali"
+```php
+$date = jalali('1405/08/19');       // strict Jalali YYYY/MM/DD
+$date->format('Y/m/d H:i:s');
+$fromCarbon = jalali(now());        // Carbon is a Gregorian instant
+$fromNative = jalali(new DateTimeImmutable());
+$date->addDays(10)->subMonths(2);   // immutable
+$date->toCarbon();
 ```
 
-Or, you may publish each resource individually:
+`jalali()` without arguments uses the package factory and configured timezone. Strings are Jalali dates; `DateTimeInterface` values are Gregorian. Invalid strings raise `InvalidDate`. See [complete English docs](docs/en/README.md) and [Persian docs](docs/fa/README.md).
 
-### Publishing the Configuration File
-
-```bash
-php artisan vendor:publish --tag="laravel-jalali-config"
+```php
+use Jalali\Jalali\Facades\Jalali;
+Jalali::now()->format('Y/m/d');
 ```
 
-### Publishing the Translations
+Eloquent casts are `JalaliDateTimeCast` for timestamps and `JalaliDateCast` for date-only storage. Validation uses `new JalaliDate()`. Publish settings and translations with `php artisan vendor:publish --tag=laravel-jalali`.
 
-```bash
-php artisan vendor:publish --tag="laravel-jalali-lang"
-```
-
-## Usage
-
-<!-- Add a basic usage example here. -->
-
-## Changelog
-
-Please see [CHANGELOG](CHANGELOG.md) for more information on what has changed recently.
-
-## Contributing
-
-Thank you for considering contributing to Laravel Jalali! Please review our [contributing guide](.github/CONTRIBUTING.md) to get started.
-
-## Security Vulnerabilities
-
-Please review [our security policy](.github/SECURITY.md) on how to report security vulnerabilities.
-
-## Credits
-
-- [Arshia Mohammadei](https://github.com/itashia)
-- [All Contributors](../../contributors)
-
-## License
-
-Laravel Jalali is open-sourced software licensed under the [MIT license](LICENSE.md).
+Run checks with `composer test`; run `composer audit --locked` for dependency advisories. License: MIT.

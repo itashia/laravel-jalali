@@ -24,7 +24,7 @@ Use this skill when a Laravel application needs to integrate the Laravel Jalali 
 
 ### 2. Apply the package's public API
 
-Document how to integrate Laravel Jalali here, replacing this placeholder with the integration steps for your package.
+Use `Jalali\Jalali\Facades\Jalali::now('Asia/Tehran')` or `Jalali\Jalali\JalaliDateTime::parse('1405/08/19')`. Parsing is strict YYYY/MM/DD. Operations are immutable. The implementation is not release ready; use `Laravel\Casts\JalaliDateTimeCast` for Gregorian timestamp storage and `Laravel\Rules\JalaliDate` for strict date input. See `docs/api.md` for date-only semantics and timezone defaults.
 
 ## Rules, References, and Templates
 
@@ -34,7 +34,7 @@ Read before executing:
 
 ## Examples
 
-- describe a representative integration scenario for Laravel Jalali
+- Format a native Carbon value with `Jalali::fromDateTime($model->created_at)->format('Y/m/d')`; this does not change storage or serialization.
 
 ## Anti-patterns
 
