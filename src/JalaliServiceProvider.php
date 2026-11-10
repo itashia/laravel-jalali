@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Jalali\Jalali;
 
+use Illuminate\Contracts\Config\Repository;
 use Illuminate\Support\ServiceProvider;
 
 class JalaliServiceProvider extends ServiceProvider
@@ -15,7 +16,7 @@ class JalaliServiceProvider extends ServiceProvider
     {
         $this->mergeConfigFrom(__DIR__.'/../config/laravel-jalali.php', 'laravel-jalali');
 
-        $this->app->singleton(Jalali::class);
+        $this->app->singleton(Jalali::class, fn (): Jalali => new Jalali(timezone: (string) $this->app->make(Repository::class)->get('laravel-jalali.timezone', 'UTC')));
     }
 
     /**

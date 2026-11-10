@@ -44,7 +44,7 @@ jobs:
           extensions: dom, curl, libxml, mbstring, zip, fileinfo, sqlite, pdo_sqlite, bcmath, intl
           ini-values: error_reporting=E_ALL
           tools: composer:v2
-          coverage: none
+          coverage: xdebug
 
       - name: Install dependencies
         run: |
@@ -69,3 +69,14 @@ jobs:
       - name: Test Suite (Windows)
         if: runner.os == 'Windows'
         run: vendor/bin/pest
+
+      - name: Line coverage
+        if: runner.os == 'Linux' && matrix.php == '8.5' && matrix.laravel == '13.*' && matrix.stability == 'prefer-stable'
+        env:
+          XDEBUG_MODE: coverage
+        run: vendor/bin/pest --coverage --min=95 --coverage-clover=build/coverage.xml
+
+      - name: Composer metadata and advisories
+        run: |
+          composer validate --strict
+          composer audit --locked
